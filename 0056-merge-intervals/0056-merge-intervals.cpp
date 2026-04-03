@@ -12,7 +12,6 @@ public:
             vector<int> curr2 = intervals[i];
             if(curr[1] >=curr2[0]){
                 int sec = max(curr[1],curr2[1]);
-                cout<<sec<<endl;
                 res.push_back({curr[0],sec});
             }else{
                 res.push_back(curr);
