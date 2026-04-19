@@ -1,27 +1,36 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
-        int n = heights.size();
-        stack<int> st;
-        int maxArea = 0;
+    int largestRectangleArea(vector<int>& arr) {
+          int n = arr.size();
+    
+    stack<int> st;
 
-        // Add sentinel height
-        heights.push_back(0);
+    int res = 0;
+    int tp, curr;
 
-        for (int i = 0; i < heights.size(); i++) {
-            // Maintain increasing stack
-            while (!st.empty() && heights[st.top()] > heights[i]) {
-                int h = heights[st.top()];
-                st.pop();
-
-                int left = st.empty() ? -1 : st.top();
-                int width = i - left - 1;
-
-                maxArea = max(maxArea, h * width);
-            }
-            st.push(i);
+    for (int i = 0; i < n; i++) {      
+         
+        while (!st.empty() && arr[st.top()] >= arr[i]) {
+          
+            // The popped item is to be considered as the 
+            // smallest element of the Histogram
+            tp = st.top(); 
+            st.pop();
+          
+            // For the popped item previous smaller element is 
+            // just below it in the stack (or current stack top)
+            // and next smaller element is i
+            int width = st.empty() ? i : i - st.top() - 1;
+          
+            res = max(res,  arr[tp] * width);
         }
-
-        return maxArea;
+        st.push(i);
+    }
+      while (!st.empty()) {
+        tp = st.top(); st.pop();
+        curr = arr[tp] * (st.empty() ? n : n - st.top() - 1);
+        res = max(res, curr);
+    }
+    return res;
     }
 };
