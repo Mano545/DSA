@@ -1,14 +1,20 @@
 class Solution {
     public boolean checkElements(int start, int end, int[] arr) {
-        int freq[] = new int[100000+1];
         int n = arr.length;
+        int cnt = 0,rightCnt = end - start +1;
         for(int i=0;i<n;i++){
-            freq[arr[i]]++;
+            if(arr[i]>=start && arr[i]<=end) cnt++;
         }
-        for(int i= start;i<=end;i++){
-            if(freq[i]==0)return false;
-        }
-        return true;
+        if(cnt==rightCnt)return true;
+        
+        // int freq[] = new int[100000+1];
+        // for(int i=0;i<n;i++){
+        //     freq[arr[i]]++;
+        // }
+        // for(int i= start;i<=end;i++){
+        //     if(freq[i]==0)return false;
+        // }
+        return false;
     }
 }
 
