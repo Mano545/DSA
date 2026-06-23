@@ -10,8 +10,6 @@ public:
             dp1.push_back(i);
             while(!dp2.empty() &&nums[dp2.back()] < nums[i]) dp2.pop_back();
             dp2.push_back(i);
-            if(!dp1.empty() &&dp1.front() < left) dp1.pop_front();
-            if(!dp2.empty() &&dp2.front() < left) dp2.pop_front();
             int mx = dp2.front();
             int mn = dp1.front();
             while(nums[mx] - nums[mn] >limit){
@@ -24,7 +22,7 @@ public:
             int len = i - left+1;
             if(m < len){
                 m = len;
-                cout<<left<<" "<<i<<" "<<nums[mx]<<" "<<nums[mn]<<endl;
+                // cout<<left<<" "<<i<<" "<<nums[mx]<<" "<<nums[mn]<<endl;
             }
            
         }
